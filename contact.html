@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Jason Dunn For Congress</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Header/Navigation -->
+    <header class="contact-header">
+        <div class="container">
+            <h1 class="contact-page-title">JASON DUNN FOR CONGRESS</h1>
+            <a href="index.html" class="back-link">← Back to Home</a>
+        </div>
+    </header>
+
+    <!-- Contact Form Section -->
+    <section class="form-section">
+        <div class="container">
+            <h2 class="section-title">Contact Jason's Campaign</h2>
+            <p class="form-intro">Join our campaign and help bring accountability back to Washington.</p>
+            
+            <form id="contactForm" class="contact-form">
+                <div class="form-group">
+                    <label for="name">Full Name *</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email Address *</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" name="phone">
+                </div>
+
+                <div class="form-group">
+                    <label for="zip">ZIP Code</label>
+                    <input type="text" id="zip" name="zip" maxlength="5">
+                </div>
+
+                <div class="form-group">
+                    <label for="interest">I'm interested in:</label>
+                    <select id="interest" name="interest">
+                        <option value="">Select an option</option>
+                        <option value="Volunteering">Volunteering</option>
+                        <option value="Making a donation">Making a donation</option>
+                        <option value="Receiving updates">Receiving updates</option>
+                        <option value="Attending an event">Attending an event</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" rows="5"></textarea>
+                </div>
+
+                <button type="submit" class="submit-button" id="submitBtn">
+                    <span id="buttonText">Send Message</span>
+                    <span id="buttonSpinner" style="display: none;">Sending...</span>
+                </button>
+
+                <div id="formMessage" class="form-message"></div>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Jason Dunn For Congress. All rights reserved.</p>
+            <p class="disclaimer">Paid for by Jason Dunn For Congress</p>
+        </div>
+    </footer>
+
+    <script>
+        // Google Sheets Configuration
+        // INSTRUCTIONS:
+        // 1. Go to https://script.google.com
+        // 2. Create a new project
+        // 3. Paste the code from the setup instructions (see README)
+        // 4. Deploy as web app and get the URL
+        // 5. Replace the URL below with your deployment URL
+        
+        const GOOGLE_SCRIPT_URL = 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE';
+
+        document.getElementById('contactForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const submitBtn = document.getElementById('submitBtn');
+            const buttonText = document.getElementById('buttonText');
+            const buttonSpinner = document.getElementById('buttonSpinner');
+            const formMessage = document.getElementById('formMessage');
+            
+            // Disable button and show loading state
+            submitBtn.disabled = true;
+            buttonText.style.display = 'none';
+            buttonSpinner.style.display = 'inline';
+            formMessage.textContent = '';
+            formMessage.className = 'form-message';
+            
+            // Collect form data
+            const formData = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value || 'Not provided',
+                zip: document.getElementById('zip').value || 'Not provided',
+                interest: document.getElementById('interest').value || 'Not specified',
+                message: document.getElementById('message').value || 'No message',
+                timestamp: new Date().toLocaleString()
+            };
+            
+            try {
+                // Send to Google Sheets
+                const response = await fetch(GOOGLE_SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors', // Required for Google Apps Script
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(formData)
+                });
+                
+                // Show success message
+                formMessage.textContent = '✓ Thank you! Your message has been sent successfully.';
+                formMessage.className = 'form-message success';
+                
+                // Reset form
+                document.getElementById('contactForm').reset();
+                
+            } catch (error) {
+                console.error('Error:', error);
+                formMessage.textContent = '✗ There was an error sending your message. Please try again or email us directly.';
+                formMessage.className = 'form-message error';
+            } finally {
+                // Re-enable button
+                submitBtn.disabled = false;
+                buttonText.style.display = 'inline';
+                buttonSpinner.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
