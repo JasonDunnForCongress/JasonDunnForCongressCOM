@@ -7,6 +7,18 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+	<button class="menu-toggle" id="menuToggle" aria-label="Open Menu">
+    <div class="bar"></div>
+    <div class="bar"></div>
+    <div class="bar"></div>
+	</button>
+
+	<nav class="nav-menu" id="navMenu">
+    <a href="index.html">Home</a>
+    <a href="FAQ.html">FAQ</a>
+    <a href="volunteer.html">Help Out</a>
+    <a href="contact.html">Contact</a>
+	</nav>
     <!-- Header/Navigation -->
     <header class="contact-header">
         <div class="container">
@@ -19,7 +31,8 @@
     <section class="form-section">
         <div class="container">
             <h2 class="section-title">Contact Jason's Campaign</h2>
-            <p class="form-intro">Join our campaign and help bring accountability back to Washington.</p>
+            <p class="form-intro">Join our campaign and help bring accountability back to Washington.<br> NOTE THIS FORM DOES NOT WORK YET, WEBSITE UNDER CONSTRUCTION
+					<br> Please Contact Support@JasonDunnForCongress.com in the meantime</p>
             
             <form id="contactForm" class="contact-form">
                 <div class="form-group">
@@ -59,10 +72,10 @@
                     <textarea id="message" name="message" rows="5"></textarea>
                 </div>
 
-                <button type="submit" class="submit-button" id="submitBtn">
+                <!--button type="submit" class="submit-button" id="submitBtn">
                     <span id="buttonText">Send Message</span>
                     <span id="buttonSpinner" style="display: none;">Sending...</span>
-                </button>
+                </button-->
 
                 <div id="formMessage" class="form-message"></div>
             </form>
@@ -144,5 +157,24 @@
             }
         });
     </script>
+	<script>
+    const menuToggle = document.getElementById('menuToggle');
+    const navMenu = document.getElementById('navMenu');
+
+    menuToggle.addEventListener('click', () => {
+        // Toggle the 'active' class on the menu
+        navMenu.classList.toggle('active');
+        
+        // Optional: Animate hamburger to an 'X'
+        menuToggle.classList.toggle('open');
+    });
+
+    // Close menu if a link is clicked
+    document.querySelectorAll('.nav-menu a').forEach(link => {
+        link.addEventListener('click', () => {
+            navMenu.classList.remove('active');
+        });
+    });
+</script>
 </body>
 </html>

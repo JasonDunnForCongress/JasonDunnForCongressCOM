@@ -190,6 +190,21 @@ body {
     overflow: hidden;
 }
 
+.video-placeholder-portrait {
+    max-width: 400px; /* Narrower for portrait */
+    margin: 40px auto;
+    aspect-ratio: 9 / 16; /* Flipped from 16/9 */
+    background: linear-gradient(135deg, #1e40af 0%, #dc2626 100%);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column; /* Stack video and text vertically */
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
 .video-placeholder::before {
     content: '';
     position: absolute;
@@ -434,6 +449,68 @@ body {
 #submitBtn:disabled {
     opacity: 0.6;
     cursor: not-allowed;
+}
+
+/* Sticky Hamburger Button */
+.menu-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+    background: #1e40af; /* Solid blue for the button base */
+    border: 2px solid white;
+    padding: 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+.bar {
+    width: 25px;
+    height: 3px;
+    background-color: white;
+}
+
+/* Slide-out Navigation Menu with Gradient */
+.nav-menu {
+    position: fixed;
+    top: 0;
+    right: -100%; 
+    width: 280px;
+    height: 100vh;
+    /* Using your campaign gradient */
+    background: linear-gradient(135deg, #1e40af 0%, #dc2626 100%);
+    box-shadow: -10px 0 30px rgba(0,0,0,0.5);
+    display: flex;
+    flex-direction: column;
+    padding-top: 100px;
+    transition: transform 0.4s cubic-bezier(0.77,0.2,0.05,1.0);
+    z-index: 999;
+}
+
+.nav-menu.active {
+    right: 0;
+    transform: translateX(0);
+}
+
+/* Navigation Links */
+.nav-menu a {
+    padding: 20px 40px;
+    text-decoration: none;
+    color: white;
+    font-weight: 800;
+    font-size: 1.4rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    transition: background 0.3s;
+}
+
+.nav-menu a:hover {
+    background: rgba(255, 255, 255, 0.15);
 }
 
 /* Responsive Design */

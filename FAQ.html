@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jason Dunn For Congress</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+	<button class="menu-toggle" id="menuToggle" aria-label="Open Menu">
+    <div class="bar"></div>
+    <div class="bar"></div>
+    <div class="bar"></div>
+	</button>
+
+	<nav class="nav-menu" id="navMenu">
+    <a href="index.html">Home</a>
+    <a href="FAQ.html">FAQ</a>
+    <a href="volunteer.html">Help Out</a>
+    <a href="contact.html">Contact</a>
+	</nav>
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">JASON DUNN<br>FOR CONGRESS<br>Frequently Asked Questions</h1>
+            <div class="stars"></div>
+        </div>
+    </header>
+
+    <!-- Under Construction Notice -->
+    <section class="under-construction">
+        <div class="container">
+            <p class="construction-text">🚧 Website Under Construction 🚧</p>
+            <p class="construction-subtext">Check back soon for updates on the campaign</p>
+        </div>
+    </section>
+	<!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Jason Dunn For Congress. All rights reserved.</p>
+            <p class="disclaimer">Paid for by Jason Dunn For Congress</p>
+        </div>
+    </footer>
+	<script>
+    const menuToggle = document.getElementById('menuToggle');
+    const navMenu = document.getElementById('navMenu');
+
+    menuToggle.addEventListener('click', () => {
+        // Toggle the 'active' class on the menu
+        navMenu.classList.toggle('active');
+        
+        // Optional: Animate hamburger to an 'X'
+        menuToggle.classList.toggle('open');
+    });
+
+    // Close menu if a link is clicked
+    document.querySelectorAll('.nav-menu a').forEach(link => {
+        link.addEventListener('click', () => {
+            navMenu.classList.remove('active');
+        });
+    });
+</script>
+</body>
+</html>

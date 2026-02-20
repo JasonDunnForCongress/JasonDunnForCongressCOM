@@ -7,6 +7,18 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+	<button class="menu-toggle" id="menuToggle" aria-label="Open Menu">
+    <div class="bar"></div>
+    <div class="bar"></div>
+    <div class="bar"></div>
+	</button>
+
+	<nav class="nav-menu" id="navMenu">
+    <a href="index.html">Home</a>
+    <a href="FAQ.html">FAQ</a>
+    <a href="volunteer.html">Help Out</a>
+    <a href="contact.html">Contact</a>
+	</nav>
     <!-- Hero Section -->
     <header class="hero">
         <div class="hero-content">
@@ -29,13 +41,13 @@
             <h2 class="section-title">Our Mission</h2>
             <div class="mission-content">
                 <p class="mission-statement">
-                    It's time to demand more from Washington. For too long, career politicians have operated without consequence, spending taxpayer dollars with no accountability and no results. 
+                    It's time to demand more from Washington. For too long, career politicians have operated without consequence, with no accountability and no results. 
                 </p>
                 <p class="mission-statement">
-                    <strong>We will restore Accountability and Oversight to Congress. WWe will answer to you—not special interests, not lobbyists, not the status quo.</strong>
+                    <strong>We will restore Accountability and Oversight to Congress. We will answer to you—not special interests, not lobbyists, not the status quo.</strong>
                 </p>
                 <p class="mission-statement">
-                    The American people deserve a government that works for them, not for party. A government that keeps its promises. A government that puts results over rhetoric and accountability over excuses.
+                    The American people deserve a government that works for them. A government that keeps its promises. A government that puts results over rhetoric and accountability over excuses.
                 </p>
                 <p class="mission-call">
                     <strong>It's time to take back our government. It's time for accountability. It's time for change.</strong>
@@ -50,13 +62,19 @@
             <!-- Introduction Video -->
             <div class="video-block">
                 <h2 class="section-title">Meet Jason Dunn</h2>
-                <div class="video-placeholder">
+                <div class=".video-placeholder-portrait">
                     <div class="video-placeholder-content">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <polygon points="5 3 19 12 5 21 5 3"></polygon>
-                        </svg>
-                        <p>Introduction Video Coming Soon</p>
-                    </div>
+    								<iframe 
+        							width="360" 
+        							height="640" 
+        							src="https://www.youtube.com/embed/fJb_z5adn9U" 
+        							title="YouTube video player" 
+        							frameborder="0" 
+        							allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+        							referrerpolicy="strict-origin-when-cross-origin" 
+        						allowfullscreen>
+										</iframe>
+								</div>
                 </div>
                 <p class="video-description">Learn about Jason's background, values, and commitment to serving our community.</p>
             </div>
@@ -107,5 +125,24 @@
             <p class="disclaimer">Paid for by Jason Dunn For Congress</p>
         </div>
     </footer>
+	<script>
+    const menuToggle = document.getElementById('menuToggle');
+    const navMenu = document.getElementById('navMenu');
+
+    menuToggle.addEventListener('click', () => {
+        // Toggle the 'active' class on the menu
+        navMenu.classList.toggle('active');
+        
+        // Optional: Animate hamburger to an 'X'
+        menuToggle.classList.toggle('open');
+    });
+
+    // Close menu if a link is clicked
+    document.querySelectorAll('.nav-menu a').forEach(link => {
+        link.addEventListener('click', () => {
+            navMenu.classList.remove('active');
+        });
+    });
+</script>
 </body>
 </html>
