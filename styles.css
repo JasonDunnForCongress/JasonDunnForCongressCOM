@@ -289,8 +289,9 @@ body {
 
 /* Contact Form Section */
 .form-section {
-    background-color: #ffffff;
+    background-color: #9F4F4F;
     padding: 100px 0;
+	text-align: center;
 }
 
 .form-section .section-title {
@@ -386,7 +387,7 @@ body {
 /* Contact Page Specific Styles */
 .contact-header {
     background: linear-gradient(135deg, #1e3a8a 0%, #b91c1c 100%);
-    padding: 30px 0;
+    padding: 30px 30px;
     text-align: center;
     color: #ffffff;
 }
@@ -418,7 +419,7 @@ body {
 .form-intro {
     text-align: center;
     font-size: 1.2rem;
-    color: #4b5563;
+    color: #DFFFFF;
     margin-bottom: 40px;
     max-width: 700px;
     margin-left: auto;
@@ -579,3 +580,72 @@ body {
         font-size: 1rem;
     }
 }
+/* Social icons */
+    .social-links {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+			justify-content: center;
+    }
+
+    .social-link {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 76px;
+      padding: 14px 8px;
+      border: 1.5px solid rgba(200,191,168,0.25);
+      border-radius: 4px;
+      color: #c8bfa8;
+      text-decoration: none;
+      transition: all 0.25s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .social-link span {
+      font-size: 0.68rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      font-weight: 600;
+      position: relative;
+      z-index: 1;
+      transition: color 0.25s ease;
+      color: #c8bfa8;
+    }
+
+    .social-link:hover span { color: #0a1f44; }
+
+    .social-link svg { position: relative; z-index: 1; }
+    .social-link:hover svg path:last-child { fill: #e8c43a; }
+
+    .social-link::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: #e8c43a;
+      transform: translateY(100%);
+      transition: transform 0.25s ease;
+      z-index: 0;
+    }
+
+    .social-link:hover::before { transform: translateY(0); }
+    .social-link:hover { color: #0a1f44; border-color: #e8c43a; }
+
+    .social-link img {
+      width: 24px;
+      height: 24px;
+      object-fit: contain;
+      position: relative;
+      z-index: 1;
+    }
+.footer-inner {
+    display: flex;
+    justify-content: center;
+}
+@media (max-width: 640px) {
+      .footer-inner { grid-template-columns: 1fr; }
+      .social-links { justify-content: flex-start; }
+    }
