@@ -3,91 +3,654 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jason Dunn For Congress - Volunteer</title>
+    <title>Jason Dunn For Congress - Help Out</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        /* ── Page-level layout ── */
+        .vol-section {
+            padding: 80px 0;
+        }
+        .vol-section:nth-child(odd) {
+            background: linear-gradient(to bottom, #ffffff 0%, #f3f4f6 100%);
+        }
+        .vol-section:nth-child(even) {
+            background: #ffffff;
+        }
+
+        .vol-inner {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* ── Section title reuse from styles.css ── */
+        .vol-title {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: #1e3a8a;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 14px;
+            position: relative;
+            display: inline-block;
+        }
+        .vol-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(to right, #1e3a8a, #b91c1c);
+        }
+        .vol-subtitle {
+            font-size: 1.1rem;
+            color: #6b7280;
+            margin-top: 20px;
+            margin-bottom: 40px;
+            max-width: 700px;
+            line-height: 1.7;
+        }
+
+        /* ── Urgency banner ── */
+        .urgency-banner {
+            background: linear-gradient(135deg, #b91c1c 0%, #7f1d1d 100%);
+            color: white;
+            padding: 28px 36px;
+            border-radius: 8px;
+            margin-bottom: 48px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            box-shadow: 0 6px 20px rgba(185,28,28,0.3);
+        }
+        .urgency-banner .urgency-icon {
+            font-size: 2.8rem;
+            flex-shrink: 0;
+        }
+        .urgency-banner h3 {
+            font-size: 1.3rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 6px;
+        }
+        .urgency-banner p {
+            font-size: 1rem;
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+        .urgency-banner strong {
+            color: #fde68a;
+        }
+
+        /* ── Cards ── */
+        .card-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin-bottom: 40px;
+        }
+        @media (max-width: 640px) {
+            .card-grid { grid-template-columns: 1fr; }
+        }
+        .vol-card {
+            background: #fff;
+            border-left: 5px solid #1e3a8a;
+            border-radius: 6px;
+            padding: 24px 28px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.07);
+        }
+        .vol-card h3 {
+            font-size: 1rem;
+            font-weight: 800;
+            color: #1e3a8a;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 10px;
+        }
+        .vol-card p {
+            font-size: 0.97rem;
+            color: #374151;
+            line-height: 1.65;
+        }
+        .vol-card.accent {
+            border-left-color: #b91c1c;
+        }
+        .vol-card.accent h3 {
+            color: #b91c1c;
+        }
+
+        /* ── Step list ── */
+        .step-list {
+            counter-reset: steps;
+            list-style: none;
+            padding: 0;
+            margin: 0 0 36px;
+        }
+        .step-list li {
+            counter-increment: steps;
+            display: flex;
+            gap: 18px;
+            align-items: flex-start;
+            padding: 16px 0;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        .step-list li:last-child { border-bottom: none; }
+        .step-num {
+            background: linear-gradient(135deg, #1e3a8a, #b91c1c);
+            color: white;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            font-size: 1rem;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+        .step-list li p {
+            font-size: 1rem;
+            color: #374151;
+            line-height: 1.65;
+        }
+        .step-list li strong {
+            color: #1e3a8a;
+            display: block;
+            font-weight: 800;
+            margin-bottom: 3px;
+        }
+
+        /* ── Download / action buttons ── */
+        .action-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin: 32px 0;
+        }
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: linear-gradient(135deg, #1e3a8a 0%, #b91c1c 100%);
+            color: white;
+            font-size: 1rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 15px 32px;
+            border-radius: 50px;
+            text-decoration: none;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: white;
+            color: #1e3a8a;
+            border: 2px solid #1e3a8a;
+            font-size: 1rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 13px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        .btn-secondary:hover {
+            background: #1e3a8a;
+            color: white;
+        }
+        .stub-note {
+            font-size: 0.85rem;
+            color: #9ca3af;
+            font-style: italic;
+            margin-top: 8px;
+        }
+
+        /* ── Video embed stub ── */
+        .video-stub {
+            max-width: 700px;
+            margin: 32px 0;
+            aspect-ratio: 16 / 9;
+            background: linear-gradient(135deg, #1e3a8a 0%, #b91c1c 100%);
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        .video-stub::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(0,0,0,0.25);
+        }
+        .video-stub-content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            padding: 20px;
+        }
+        .video-stub-content svg {
+            width: 64px;
+            height: 64px;
+            margin-bottom: 16px;
+            opacity: 0.9;
+        }
+        .video-stub-content p {
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            opacity: 0.85;
+            margin-top: 8px;
+        }
+
+        /* ── Talking points box ── */
+        .talking-points {
+            background: #1e3a8a;
+            color: white;
+            border-radius: 8px;
+            padding: 36px 40px;
+            margin: 40px 0;
+        }
+        .talking-points h3 {
+            font-size: 1.2rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 24px;
+            color: #fde68a;
+        }
+        .talking-points ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .talking-points ul li {
+            padding: 10px 0 10px 28px;
+            position: relative;
+            line-height: 1.65;
+            font-size: 1rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        .talking-points ul li:last-child { border-bottom: none; }
+        .talking-points ul li::before {
+            content: "★";
+            color: #fde68a;
+            position: absolute;
+            left: 0;
+            top: 10px;
+            font-size: 0.8rem;
+        }
+
+        /* ── Print-on-demand callout ── */
+        .pod-callout {
+            background: #f9fafb;
+            border: 2px dashed #1e3a8a;
+            border-radius: 8px;
+            padding: 32px 36px;
+            margin: 40px 0;
+            text-align: center;
+        }
+        .pod-callout h3 {
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: #1e3a8a;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+        }
+        .pod-callout p {
+            font-size: 1rem;
+            color: #374151;
+            line-height: 1.7;
+            max-width: 600px;
+            margin: 0 auto 24px;
+        }
+
+        /* ── Coming soon ── */
+        .coming-soon-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-top: 36px;
+        }
+        @media (max-width: 640px) {
+            .coming-soon-grid { grid-template-columns: 1fr; }
+        }
+        .coming-card {
+            background: white;
+            border-radius: 8px;
+            padding: 24px 20px;
+            text-align: center;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.06);
+            border-top: 4px solid #1e3a8a;
+        }
+        .coming-card .icon {
+            font-size: 2.2rem;
+            margin-bottom: 12px;
+        }
+        .coming-card h3 {
+            font-size: 0.95rem;
+            font-weight: 800;
+            color: #1e3a8a;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 8px;
+        }
+        .coming-card p {
+            font-size: 0.9rem;
+            color: #6b7280;
+            line-height: 1.6;
+        }
+        .coming-badge {
+            display: inline-block;
+            background: #fef3c7;
+            color: #92400e;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            padding: 3px 10px;
+            border-radius: 20px;
+            margin-top: 10px;
+        }
+
+        /* ── Quote pull ── */
+        .pull-quote {
+            border-left: 6px solid #b91c1c;
+            padding: 20px 28px;
+            margin: 40px 0;
+            background: white;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.06);
+            border-radius: 0 6px 6px 0;
+        }
+        .pull-quote p {
+            font-size: 1.2rem;
+            font-style: italic;
+            color: #1e3a8a;
+            line-height: 1.7;
+            font-weight: 600;
+        }
+
+        @media (max-width: 768px) {
+            .vol-title { font-size: 1.7rem; }
+            .urgency-banner { flex-direction: column; text-align: center; }
+            .talking-points { padding: 24px 20px; }
+        }
+    </style>
 </head>
 <body>
-	<button class="menu-toggle" id="menuToggle" aria-label="Open Menu">
-    <div class="bar"></div>
-    <div class="bar"></div>
-    <div class="bar"></div>
-	</button>
 
-	<nav class="nav-menu" id="navMenu">
-    <a href="index.html">Home</a>
-    <a href="FAQ.html">FAQ</a>
-    <a href="volunteer.html">Help Out</a>
-    <a href="contact.html">Contact</a>
-	</nav>
-    <!-- Hero Section -->
+    <button class="menu-toggle" id="menuToggle" aria-label="Open Menu">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+    </button>
+
+    <nav class="nav-menu" id="navMenu">
+        <a href="index.html">Home</a>
+        <a href="platform.html">Platform</a>
+        <a href="FAQ.html">FAQ</a>
+        <a href="volunteer.html">Help Out</a>
+        <a href="contact.html">Contact</a>
+    </nav>
+
+    <!-- Hero -->
     <header class="hero">
         <div class="hero-content">
-            <h1 class="hero-title">How can you Help the <br>JASON DUNN<br>FOR CONGRESS<br> Campaign</h1>
+            <h1 class="hero-title">HELP ELECT<br>JASON DUNN<br>FOR CONGRESS</h1>
             <div class="stars"></div>
         </div>
     </header>
 
-    <!-- Under Construction Notice -->
-    <section class="under-construction">
-        <div class="container">
-            <p class="construction-text">🚧 Website Under Construction 🚧</p>
-            <p class="construction-subtext">Check back soon for updates on the campaign</p>
+
+    <!-- ── SECTION 1: SPREAD THE WORD ── -->
+    <section class="vol-section">
+        <div class="vol-inner">
+
+            <h2 class="vol-title">Spread the Word</h2>
+            <p class="vol-subtitle">Pennsylvanians deserve real choices — a responsible, principled option beyond the political extremes. You can help make sure they know one exists.</p>
+
+            <div class="pull-quote">
+                <p>"We don't need more 'us versus them.' We need right versus wrong — a candidate as moral as he is strong, as principled as he is populist."</p>
+            </div>
+
+            <div class="talking-points">
+                <h3>🗣 Talking Points — Why Jason?</h3>
+                <ul>
+                    <li>Jason is running as a responsible alternative to political chaos on both sides — disciplined, lawful, and serious about governing.</li>
+                    <li>He refuses monetary donations from large donors or PACs — so he answers only to his constituents, not special interests.</li>
+                    <li>He supports real fiscal discipline: no wasteful governance, no reckless spending, and no executive orders designed to fail in court.</li>
+                    <li>He's tough on housing costs — calling out private equity firms that are pricing working families out of their own neighborhoods.</li>
+                    <li>He believes in a diversified, domestic energy future — nuclear, solar, wind — that strengthens national security and competes with China.</li>
+                    <li>He stands for professional, constitutional law enforcement — at the border and in Washington, where no one should be above the law.</li>
+                    <li>Pennsylvania's 14th District deserves a candidate who "does the work" — not one who makes headlines and governs without integrity.</li>
+                </ul>
+            </div>
+
+            <h3 style="font-size:1.1rem; font-weight:800; color:#1e3a8a; text-transform:uppercase; letter-spacing:0.08em; margin-bottom:20px;">Simple Ways to Help Get the Word Out</h3>
+
+            <div class="card-grid">
+                <div class="vol-card">
+                    <h3>📱 Share on Social Media</h3>
+                    <p>Follow and share Jason's posts on Facebook, Instagram, X, and YouTube. Tag friends and family in Southwest Pennsylvania. Engagement grows reach — likes, shares, and comments all help.</p>
+                </div>
+                <div class="vol-card">
+                    <h3>💬 Talk to Your Neighbors</h3>
+                    <p>Word of mouth is the most powerful campaign tool there is. Tell one person today why you support Jason. Ask them to tell one more. That's how movements start.</p>
+                </div>
+                <div class="vol-card accent">
+                    <h3>📧 Email Your Network</h3>
+                    <p>Send a short email to friends and family in the district. Point them to this website. Let them know there's a serious, principled candidate in this race — and the deadline to register to vote.</p>
+                </div>
+                <div class="vol-card accent">
+                    <h3>🏘 Community Events</h3>
+                    <p>Carry a clipboard to local events, churches, sports games, or neighborhood gatherings. Have a short conversation. You don't have to give a speech — just share what you believe in.</p>
+                </div>
+            </div>
+
         </div>
     </section>
-	<!-- Footer -->
+
+
+    <!-- ── SECTION 2: URGENT – PETITION SIGNATURES ── -->
+    <section class="vol-section">
+        <div class="vol-inner">
+
+            <div class="urgency-banner">
+                <div class="urgency-icon">📋</div>
+                <div>
+                    <h3>Urgent: Petition Signatures Needed — Deadline March 10, 2026</h3>
+                    <p>Before Jason can appear on the ballot, we need nomination petition signatures. <strong>Anyone can collect signatures</strong> — but signers must be registered Republicans in Pennsylvania's 14th Congressional District. Every signature counts. Time is short.</p>
+                </div>
+            </div>
+
+            <h2 class="vol-title">Sign or Collect a Petition</h2>
+            <p class="vol-subtitle">Getting Jason on the ballot is the single most important thing you can do right now. Here's how it works and how to help.</p>
+
+            <ul class="step-list">
+                <li>
+                    <div class="step-num">1</div>
+                    <p><strong>Download the Petition Form</strong>
+                    Download and print the nomination petition for <em>your specific county of residence</em> — each county has its own form and they are not interchangeable. Each sheet must be printed <strong>double-sided on a single sheet of paper</strong> (front and back). Do not print two separate one-sided pages and staple them together — that will invalidate the form. Print as many sheets as you need for collecting signatures.</p>
+                </li>
+                <li>
+                    <div class="step-num">2</div>
+                    <p><strong>Know Who Can Sign</strong>
+                    Only registered Republicans residing in PA's 14th Congressional District may sign. Not sure about your district? Check your voter registration card or the PA Voter Registration portal.</p>
+                </li>
+                <li>
+                    <div class="step-num">3</div>
+                    <p><strong>Anyone Can Collect</strong>
+                    You don't have to be a Republican or even a district resident to go door-to-door, talk to neighbors, or collect at community events. Bring a clipboard and spread the word.</p>
+                </li>
+                <li>
+                    <div class="step-num">4</div>
+                    <p><strong>Watch the Instructional Video</strong>
+                    Before you go out, watch our short how-to video below. It walks through the rules so your signatures count.</p>
+                </li>
+                <li>
+                    <div class="step-num">5</div>
+                    <p><strong>Return Completed Sheets</strong>
+                    Download the return instructions below and get your completed sheets back to the campaign before <strong>March 10, 2026</strong>.</p>
+                </li>
+            </ul>
+
+            <!-- Petition download stubs -->
+            <div class="action-row">
+                <a href="#" class="btn-primary">
+                    <!-- STUB: Replace # with link to petition PDF -->
+                    ⬇ Download Petition Form
+                </a>
+                <a href="#" class="btn-secondary">
+                    <!-- STUB: Replace # with link to return instructions PDF -->
+                    📬 Return Instructions
+                </a>
+            </div>
+            <p class="stub-note">* Petition form and return instructions — links coming soon. Check back or contact us.</p>
+
+            <!-- Video stub -->
+            <div class="video-stub">
+                <!-- STUB: Replace this entire div with a YouTube <iframe> embed -->
+                <!-- Example: <iframe width="700" height="394" src="https://www.youtube.com/embed/VIDEO_ID" title="Petition Instructions" frameborder="0" allowfullscreen style="border-radius:10px;width:100%;max-width:700px;aspect-ratio:16/9;"></iframe> -->
+                <div class="video-stub-content">
+                    <svg viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg>
+                    How-To: Collecting Petition Signatures
+                    <p>YouTube instructional video — embed link coming soon</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- ── SECTION 3: PRINT ON DEMAND ── -->
+    <section class="vol-section">
+        <div class="vol-inner">
+
+            <h2 class="vol-title">Campaign Store — Volunteer Needed</h2>
+            <p class="vol-subtitle">We're looking for a volunteer with experience setting up a print-on-demand storefront to help supporters show their support with yard signs, shirts, bumper stickers, and more.</p>
+
+            <div class="pod-callout">
+                <h3>🛍 Can You Set Up Our Campaign Store?</h3>
+                <p>We need a volunteer to set up and manage a print-on-demand web storefront (such as Printful, Printify, or similar) featuring campaign merchandise. No experience running a campaign is required — just familiarity with e-commerce and print-on-demand platforms.</p>
+                <a href="contact.html" class="btn-primary">📩 Contact Us — I Can Help</a>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- ── SECTION 4: MORE WAYS TO HELP COMING SOON ── -->
+    <section class="vol-section">
+        <div class="vol-inner">
+
+            <h2 class="vol-title">More Ways to Help — Coming After March 10</h2>
+            <p class="vol-subtitle">Once nomination petitions are secured, the campaign will ramp up. Here's a preview of volunteer opportunities on the horizon.</p>
+
+            <div class="coming-soon-grid">
+                <div class="coming-card">
+                    <div class="icon">🚪</div>
+                    <h3>Canvassing</h3>
+                    <p>Go door-to-door in your neighborhood to talk with voters about Jason's platform.</p>
+                    <span class="coming-badge">Coming Soon</span>
+                </div>
+                <div class="coming-card">
+                    <div class="icon">📣</div>
+                    <h3>Events & Rallies</h3>
+                    <p>Help organize and staff local campaign events and community town halls.</p>
+                    <span class="coming-badge">Coming Soon</span>
+                </div>
+                <div class="coming-card">
+                    <div class="icon">✍️</div>
+                    <h3>Letters to the Editor</h3>
+                    <p>Write to your local paper about why Jason deserves your district's vote.</p>
+                    <span class="coming-badge">Coming Soon</span>
+                </div>
+                <div class="coming-card">
+                    <div class="icon">📸</div>
+                    <h3>Social Media Team</h3>
+                    <p>Help create and post content that spreads the campaign's message online.</p>
+                    <span class="coming-badge">Coming Soon</span>
+                </div>
+                <div class="coming-card">
+                    <div class="icon">🪧</div>
+                    <h3>Yard Signs</h3>
+                    <p>Show your support visibly — put a sign in your yard and encourage your neighbors to do the same.</p>
+                    <span class="coming-badge">Coming Soon</span>
+                </div>
+            </div>
+
+            <div style="text-align:center; margin-top:48px;">
+                <p style="font-size:1.05rem; color:#374151; margin-bottom:20px;">Want to be notified when these opportunities open up?</p>
+                <a href="contact.html" class="btn-primary">Stay in Touch</a>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- Footer -->
     <footer class="footer">
-			<div class="footer-inner">
-       <div class="social-links">
-				Social Media Links
-      <!-- Facebook -->
-      <a href="https://www.facebook.com/people/Jason-Dunn-for-Congress/61588317725556/" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Facebook">
-        <svg viewBox="0 0 36 36" fill="currentColor" height="24" width="24" style="position:relative;z-index:1;"><path d="M20.181 35.87C29.094 34.791 36 27.202 36 18c0-9.941-8.059-18-18-18S0 8.059 0 18c0 8.442 5.811 15.526 13.652 17.471L14 34h5.5l.681 1.87Z"></path><path style="fill:#0a1f44;" d="M13.651 35.471v-11.97H9.936V18h3.715v-2.37c0-6.127 2.772-8.964 8.784-8.964 1.138 0 3.103.223 3.91.446v4.983c-.425-.043-1.167-.065-2.081-.065-2.952 0-4.09 1.116-4.09 4.025V18h5.883l-1.008 5.5h-4.867v12.37a18.183 18.183 0 0 1-6.53-.399Z"></path></svg>
-        <span>Facebook</span>
-      </a>
-
-      <!-- X / Twitter -->
-      <a href="https://x.com/JasonDunn4Cngrs" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="X (Twitter)">
-        <img src="https://abs.twimg.com/favicons/twitter.3.ico" alt="X (Twitter)" />
-        <span>X</span>
-      </a>
-
-      <!-- Instagram -->
-      <a href="https://www.instagram.com/jasondunnforcongress" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Instagram">
-        <img src="https://static.cdninstagram.com/rsrc.php/v3/yI/r/VsNE-OHk_8a.png" alt="Instagram" />
-        <span>Instagram</span>
-      </a>
-
-      <!-- YouTube -->
-      <a href="https://www.youtube.com/@JasonDunnForCongress" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="YouTube">
-        <img src="https://www.youtube.com/favicon.ico" alt="YouTube" />
-        <span>YouTube</span>
-      </a>
-
-    </div>
-  </div>
-         <div class="container">
+        <div class="footer-inner">
+            <div class="social-links">
+                Social Media Links
+                <a href="https://www.facebook.com/people/Jason-Dunn-for-Congress/61588317725556/" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Facebook">
+                    <svg viewBox="0 0 36 36" fill="currentColor" height="24" width="24" style="position:relative;z-index:1;"><path d="M20.181 35.87C29.094 34.791 36 27.202 36 18c0-9.941-8.059-18-18-18S0 8.059 0 18c0 8.442 5.811 15.526 13.652 17.471L14 34h5.5l.681 1.87Z"></path><path style="fill:#0a1f44;" d="M13.651 35.471v-11.97H9.936V18h3.715v-2.37c0-6.127 2.772-8.964 8.784-8.964 1.138 0 3.103.223 3.91.446v4.983c-.425-.043-1.167-.065-2.081-.065-2.952 0-4.09 1.116-4.09 4.025V18h5.883l-1.008 5.5h-4.867v12.37a18.183 18.183 0 0 1-6.53-.399Z"></path></svg>
+                    <span>Facebook</span>
+                </a>
+                <a href="https://x.com/JasonDunn4Cngrs" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="X (Twitter)">
+                    <img src="https://abs.twimg.com/favicons/twitter.3.ico" alt="X (Twitter)" />
+                    <span>X</span>
+                </a>
+                <a href="https://www.instagram.com/jasondunnforcongress" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Instagram">
+                    <img src="https://static.cdninstagram.com/rsrc.php/v3/yI/r/VsNE-OHk_8a.png" alt="Instagram" />
+                    <span>Instagram</span>
+                </a>
+                <a href="https://www.youtube.com/@JasonDunnForCongress" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="YouTube">
+                    <img src="https://www.youtube.com/favicon.ico" alt="YouTube" />
+                    <span>YouTube</span>
+                </a>
+            </div>
+        </div>
+        <div class="container">
             <p>&copy; 2026 Jason Dunn For Congress. All rights reserved.</p>
             <p class="disclaimer">Paid for by Jason Dunn For Congress</p>
         </div>
     </footer>
-	<script>
-    const menuToggle = document.getElementById('menuToggle');
-    const navMenu = document.getElementById('navMenu');
 
-    menuToggle.addEventListener('click', () => {
-        // Toggle the 'active' class on the menu
-        navMenu.classList.toggle('active');
-        
-        // Optional: Animate hamburger to an 'X'
-        menuToggle.classList.toggle('open');
-    });
-
-    // Close menu if a link is clicked
-    document.querySelectorAll('.nav-menu a').forEach(link => {
-        link.addEventListener('click', () => {
-            navMenu.classList.remove('active');
+    <script>
+        const menuToggle = document.getElementById('menuToggle');
+        const navMenu = document.getElementById('navMenu');
+        menuToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            menuToggle.classList.toggle('open');
         });
-    });
-</script>
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+            });
+        });
+    </script>
+
 </body>
 </html>
